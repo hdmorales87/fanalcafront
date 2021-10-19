@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <h1>Empleados</h1>
+    <hr>
+    <div class="col-md-12 d-flex justify-content-end">
+      <button type="button" class="btn btn-primary" [routerLink]="['/crear-empleado']">Agregar</button>
+    </div>
+  
+    <div class="loading" *ngIf="!empleados">
+      Cargando listado...
+    </div>
+  
+    <div class="alert alert-warning" *ngIf="empleados && empleados.length == 0">
+      No hay empleados registrados
+    </div>
+  
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Area</th>
+        <th>SubArea</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let empleado of empleados">
+        <td>{{empleado.id}}</td>
+        <td>{{empleado.area.nombre}}</td>
+        <td>{{empleado.subarea.nombre}}</td>
+        <td>{{empleado.nombres}}</td>
+        <td>{{empleado.apellidos}}</td>
+        <td>
+          <a [routerLink]="['/editar-empleado',empleado.id]" class="btn btn-warning mr-2">Editar</a>
+          <!-- Boton para abrir modal -->
+          <button type="button" class="btn btn btn-danger" data-toggle="modal" [attr.data-target]="'#myModal'+empleado.id" (click)="deleteEmpleado(empleado.id)">
+            Borrar
+          </button>        
+        </td>
+      </tr>
+    </table>
+  </div>

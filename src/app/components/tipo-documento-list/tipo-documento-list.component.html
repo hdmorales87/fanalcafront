@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <h1>Tipos de Documento</h1>
+    <hr>
+    <div class="col-md-12 d-flex justify-content-end">
+      <button type="button" class="btn btn-primary" [routerLink]="['/crear-tipo-documento']">Agregar</button>
+    </div>
+  
+    <div class="loading" *ngIf="!tipos">
+      Cargando listado...
+    </div>
+  
+    <div class="alert alert-warning" *ngIf="tipos && tipos.length == 0">
+      No hay tipos de documento registrados
+    </div>
+  
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let tipo of tipos">
+        <td>{{tipo.id}}</td>
+        <td>{{tipo.nombre}}</td>
+        <td>
+          <a [routerLink]="['/editar-tipo-documento',tipo.id]" class="btn btn-warning mr-2">Editar</a>
+          <!-- Boton para abrir modal -->
+          <button type="button" class="btn btn btn-danger" data-toggle="modal" [attr.data-target]="'#myModal'+tipo.id" (click)="deleteTipoDocumento(tipo.id)">
+            Borrar
+          </button>        
+        </td>
+      </tr>
+    </table>
+  </div>

@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <h1>Subareas</h1>
+    <hr>
+    <div class="col-md-12 d-flex justify-content-end">
+      <button type="button" class="btn btn-primary" [routerLink]="['/crear-sub-area']">Agregar</button>
+    </div>
+  
+    <div class="loading" *ngIf="!subareas">
+      Cargando listado...
+    </div>
+  
+    <div class="alert alert-warning" *ngIf="subareas && subareas.length == 0">
+      No hay subareas registradas
+    </div>
+  
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Area</th>
+        <th>Nombre</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let subarea of subareas">
+        <td>{{subarea.id}}</td>
+        <td>{{subarea.area.nombre}}</td>
+        <td>{{subarea.nombre}}</td>
+        <td>
+          <a [routerLink]="['/editar-sub-area',subarea.id]" class="btn btn-warning mr-2">Editar</a>
+          <!-- Boton para abrir modal -->
+          <button type="button" class="btn btn btn-danger" data-toggle="modal" [attr.data-target]="'#myModal'+subarea.id" (click)="deleteSubArea(subarea.id)">
+            Borrar
+          </button>        
+        </td>
+      </tr>
+    </table>
+  </div>

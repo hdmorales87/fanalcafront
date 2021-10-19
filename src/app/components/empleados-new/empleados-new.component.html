@@ -1,0 +1,64 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<p *ngIf="status != 'success'">
+		Crea un nuevo empleado.
+	</p>	
+	<hr/>
+
+	<div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'">
+		El empleado se ha creado correctamente
+	</div>
+
+	<div class="alert alert-danger col-md-5 mt-3" *ngIf="status == 'error'">
+		El empleado no se ha guardado
+	</div>
+
+	<!--Formulario de crear categoria -->
+
+	<form class="col-md-5 ml-0 pl-0" #empleadoForm="ngForm" (ngSubmit)="onSubmit(empleadoForm)">
+		<div class="form-group">
+            <label>Area</label>
+            <select name="area" id="area" class="form-control" #area="ngModel" [(ngModel)]="empleado.area" required>
+              <option [ngValue]="item" *ngFor="let item of areas">{{item.nombre}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>SubArea</label>
+            <select name="subarea" id="subarea" class="form-control" #subarea="ngModel" [(ngModel)]="empleado.subarea" required>
+              <option [ngValue]="item" *ngFor="let item of subareas">{{item.nombre}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tipo de Documento</label>
+            <select name="tipo_documento" id="tipo_documento" class="form-control" #tipo_documento="ngModel" [(ngModel)]="empleado.tipo_documento" required>
+              <option [ngValue]="item" *ngFor="let item of tiposdocumento">{{item.nombre}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+			<label for="documento">Documento</label>
+			<input type="number" name="documento" class="form-control" #documento="ngModel" [(ngModel)]="empleado.documento" required>
+			<small *ngIf="!documento.valid && documento.touched" class="invalid-feedback d-block">
+				El documento del empleado no es válido
+			</small>
+		</div>
+
+        <div class="form-group">
+			<label for="apellidos">Nombres</label>
+			<input type="text" name="nombres" class="form-control" #nombres="ngModel" [(ngModel)]="empleado.nombres" required>
+			<small *ngIf="!nombres.valid && nombres.touched" class="invalid-feedback d-block">
+				los nombres del empleado no son válidos
+			</small>
+		</div>
+        <div class="form-group">
+			<label for="apellidos">Apellidos</label>
+			<input type="text" name="apellidos" class="form-control" #apellidos="ngModel" [(ngModel)]="empleado.apellidos" required>
+			<small *ngIf="!apellidos.valid && apellidos.touched" class="invalid-feedback d-block">
+				Los apellidos del empleado no son válidos
+			</small>
+		</div>
+		<input type="submit" value="Guardar" class="btn btn-success" [disabled]="empleadoForm.invalid"/>
+	</form>
+	<br/>
+</div>
+
+

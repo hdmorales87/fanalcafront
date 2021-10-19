@@ -1,0 +1,30 @@
+<div class="col-md-12 mt-3">
+	<h1>{{page_title}}</h1>
+	<p *ngIf="status != 'success'">
+		Crea una nuevo tipo de documento.
+	</p>	
+	<hr/>
+
+	<div class="alert alert-success col-md-5 mt-3" *ngIf="status == 'success'">
+		El tipo de documento se ha creado correctamente
+	</div>
+
+	<div class="alert alert-danger col-md-5 mt-3" *ngIf="status == 'error'">
+		El tipo de documento no se ha guardado
+	</div>
+
+	<!--Formulario de crear categoria -->
+
+	<form class="col-md-5 ml-0 pl-0" #tipoDocumentoForm="ngForm" (ngSubmit)="onSubmit(tipoDocumentoForm)">
+		<div class="form-group">
+			<label for="nombre">Nombre</label>
+			<input type="text" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="tipoDocumento.nombre" required>
+			<small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">
+				El nombre del tipo de documento no es válido
+			</small>
+		</div>
+		<input type="submit" value="Guardar" class="btn btn-success" [disabled]="tipoDocumentoForm.invalid"/>
+	</form>
+	<br/>
+</div>
+
