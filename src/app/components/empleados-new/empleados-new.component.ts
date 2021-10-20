@@ -61,7 +61,7 @@ export class EmpleadosNewComponent implements OnInit {
             if(response.status != 'error'){
                 this.empleado = response.category;
                 this.status = 'success';
-                this._router.navigate(['/sub-areas']);
+                this._router.navigate(['/empleados']);
             }
             else{
                 this.status = 'error';
